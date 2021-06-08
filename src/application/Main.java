@@ -9,7 +9,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
-import model.entities.Seller;
 
 public class Main extends Application {
 	
@@ -36,9 +35,9 @@ public class Main extends Application {
 		
 		// testing implementation
 		SellerDao sellerDao = DaoFactory.createSellerDao();
-		System.out.println("FindById");
-		Seller seller = sellerDao.findById(2);
-		System.out.println(seller);
+		System.out.println("DeleteById");
+		sellerDao.deleteById(17);
+	
 		
 	}
 	
