@@ -39,8 +39,10 @@ public class Main extends Application {
 		
 		// testing implementation
 		DepartmentDao depDao = DaoFactory.createDepartmentDao();
-		Department dep = depDao.findById(2);
-		System.out.println(dep);
+		 depDao.deleteById(15);
+		//Department dep = new Department(null, "PinkFLoyd");
+		//depDao.insert(dep);
+		//System.out.println(dep);
 		
 	
 		
