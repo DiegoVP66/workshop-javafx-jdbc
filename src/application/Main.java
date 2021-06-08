@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
+import model.entities.Department;
 import model.entities.Seller;
 
 public class Main extends Application {
@@ -38,13 +39,14 @@ public class Main extends Application {
 		
 		// testing implementation
 		SellerDao sellerDao = DaoFactory.createSellerDao();
-		List<Seller> list = sellerDao.findAll();
-		System.out.println("FindAll method");
+		Department dep = new Department(1, null);
+		List<Seller> list = sellerDao.findByDepartment(dep);
+		System.out.println("FindByDepartmentId method");
 		for(Seller sellers : list) {
 			System.out.println(sellers);
 		}
 		
-		DB.closeConnection();
+		
 	}
 	
 	public static Scene getMainScene() {
