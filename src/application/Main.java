@@ -14,9 +14,9 @@ import model.dao.DepartmentDao;
 import model.entities.Department;
 
 public class Main extends Application {
-	
+
 	private static Scene mainScene;
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -35,18 +35,9 @@ public class Main extends Application {
 
 	public static void main(String[] args) throws ParseException {
 		launch(args);
-		
-		
-		// testing implementation
-		DepartmentDao depDao = DaoFactory.createDepartmentDao();
-		Department dep = depDao.findById(4);
-		dep.setName("Movies");
-		depDao.update(dep);
-		
-	
-		
+
 	}
-	
+
 	public static Scene getMainScene() {
 		return mainScene;
 	}
