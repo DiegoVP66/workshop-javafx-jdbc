@@ -39,11 +39,8 @@ public class Main extends Application {
 		
 		// testing implementation
 		DepartmentDao depDao = DaoFactory.createDepartmentDao();
-		List<Department> list = depDao.findAll();
-		
-		for(Department dep : list) {
-			System.out.println(dep);
-		}
+		Department dep = depDao.findById(2);
+		System.out.println(dep);
 		
 	
 		
