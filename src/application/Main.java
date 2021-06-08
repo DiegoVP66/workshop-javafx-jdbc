@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.List;
 
 import db.DB;
 import javafx.application.Application;
@@ -8,6 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+import model.dao.DaoFactory;
+import model.dao.SellerDao;
+import model.entities.Seller;
 
 public class Main extends Application {
 	
@@ -32,6 +36,15 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		
+		// testing implementation
+		SellerDao sellerDao = DaoFactory.createSellerDao();
+		List<Seller> list = sellerDao.findAll();
+		System.out.println("FindAll method");
+		for(Seller sellers : list) {
+			System.out.println(sellers);
+		}
+		
+		DB.closeConnection();
 	}
 	
 	public static Scene getMainScene() {
