@@ -2,7 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import model.dao.DaoFactory;
-import model.dao.SellerDao;
+import model.dao.DepartmentDao;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class Main extends Application {
 	
@@ -37,15 +36,15 @@ public class Main extends Application {
 	public static void main(String[] args) throws ParseException {
 		launch(args);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		// testing implementation
-		SellerDao sellerDao = DaoFactory.createSellerDao();
-		Department dep = new Department(2, null);
-		System.out.println("insert");
-		Seller seller = new Seller(null, "David Gilmour", "darkSideOfTheMoon@gmail.com",sdf.parse("10/10/1960"), 1000000.00, dep);
-		sellerDao.insert(seller);
 		
-		System.out.println(seller);
+		// testing implementation
+		DepartmentDao depDao = DaoFactory.createDepartmentDao();
+		List<Department> list = depDao.findAll();
+		
+		for(Department dep : list) {
+			System.out.println(dep);
+		}
+		
 	
 		
 	}
