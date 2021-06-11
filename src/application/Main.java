@@ -2,16 +2,12 @@ package application;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-import model.dao.DaoFactory;
-import model.dao.DepartmentDao;
-import model.entities.Department;
 
 public class Main extends Application {
 
