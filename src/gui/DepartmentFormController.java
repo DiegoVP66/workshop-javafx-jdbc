@@ -1,19 +1,22 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import db.DBException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import model.entities.Department;
 import model.services.DepartmentService;
 
@@ -22,6 +25,9 @@ public class DepartmentFormController implements Initializable {
 	private DepartmentService service;
 
 	private Department entity;
+	
+	private List<DataChangeListener> dataChangeListener = new ArrayList<>();
+	
 
 	@FXML
 	private Label labelError;
@@ -49,12 +55,20 @@ public class DepartmentFormController implements Initializable {
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
+			notifyDataChangeListener();
 			Utils.currentStage(event).close();
 
 		} catch (DBException e) {
 			Alerts.showAlert("Error Saving object", null, e.getMessage(), AlertType.ERROR);
 		}
 
+	}
+
+	private void notifyDataChangeListener() {
+		for(DataChangeListener listener : dataChangeListener) {
+			listener.onDataChanged();
+		}
+		
 	}
 
 	private Department getFormData() {
@@ -78,6 +92,10 @@ public class DepartmentFormController implements Initializable {
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
+	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListener.add(listener);
+	}
 
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
@@ -88,8 +106,6 @@ public class DepartmentFormController implements Initializable {
 	private void initializeNodes() {
 		Constraints.setTextFieldInteger(txtFieldId);
 		Constraints.setTextFieldMaxLenght(txtFieldName, 30);
-		Constraints.setTextFieldMaxLenght(txtFieldId, 1);
-
 	}
 
 	public void updateDepartmentForm() {
